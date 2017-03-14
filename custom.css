@@ -25,7 +25,9 @@
   a[href^="javascript:"]:after {
     content: "";
   }
-
+  hr{
+    border: 1px solid #555;
+  }
   pre,
   blockquote {
     border: 1px solid #999;
@@ -127,9 +129,13 @@ small,
 .splendor-small {
   font-size: .707em;
 }
-
+hr{
+  border-top: 1px solid #555;
+}
 /* https://github.com/mrmrs/fluidity */
-
+.MathJax span {
+    font-size: 19px;
+}
 img,
 canvas,
 iframe,
