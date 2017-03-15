@@ -1,3 +1,39 @@
+class Automata:
+    def __init__(self, Q, S, d, q, F):
+        self.Q = Q
+        self.S = S
+        self.d = d
+        self.q = q
+        self.F = F
+
+    def funcionExtendida(self, q, w):
+        if len(w) > 0:
+          p = self.funcionExtendida(q,w[0:len(w)-1])
+          print(w[-1])
+          return self.d(p,w[-1])
+        else:
+            return q
+#Funcion de transicion de A        
+def ISBNchecker(q, s):
+    print(str(q) + "  " + str(s[0]))
+    if s[1] == 'I':
+        return (q-s[0]) % 10
+    elif s[1] == 'P':
+        return (q-3*s[0]) % 10
+    elif s[1] == 'F':
+        if s[0] == q:
+          return 'Z'
+    return q
+    
+A = Automata(range(10), [[str(x)+'I',str(x)+'P',str(x)+'F' ] for x in range(10)],ISBNchecker,0,'Z')
+isbn = "9780306406157"
+isbne = [[isbn[i], ('P' if (i+1)%2 ==0 else 'I')] for i in range(len(isbn))]
+isbne[-1] = (isbne[-1],'F')
+print(isbne)
+print(A.funcionExtendida(0,isbne))
+
+
+
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
