@@ -11687,218 +11687,6 @@ ul.typeahead-list > li > a {
 .ansi-bold { font-weight: bold; }
 
     </style>
-<style type="text/css">
-    @media print {
-  *,
-  *:before,
-  *:after {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
-
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-
-  a[href^="#"]:after,
-  a[href^="javascript:"]:after {
-    content: "";
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  img {
-    max-width: 100% !important;
-  }
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-
-html {
-  font-size: 12px;
-}
-
-@media screen and (min-width: 32rem) and (max-width: 48rem) {
-  html {
-    font-size: 15px;
-  }
-}
-
-@media screen and (min-width: 48rem) {
-  html {
-    font-size: 16px;
-  }
-}
-
-body {
-  line-height: 1.85;
-}
-
-p,
-.splendor-p {
-  font-size: 1rem;
-  margin-bottom: 1.3rem;
-}
-
-.rendered_html h1,
-.rendered_html h2,
-.rendered_html h3,
-.rendered_html h4{
-  margin: 0 0 0rem;
-  line-height: 1;
-}
-
-.rendered_html h5,
-.rendered_html h6{
-  margin: 8px 0 0 0;
-}
-
-.rendered_html h1 {
-  margin-top: 0;
-  font-size: 3.998rem;
-}
-
-.rendered_html h2{
-  font-size: 2.827rem;
-}
-
-.rendered_html h3{
-  font-size: 1.999rem;
-}
-
-.rendered_html h4 {
-  font-size: 1.414rem;
-}
-
-.rendered_html h5 {
-
-  font-size: 1.121rem;
-}
-
-.rendered_html h6{
-  font-size: .88rem;
-}
-
-small,
-.splendor-small {
-  font-size: .707em;
-}
-
-/* https://github.com/mrmrs/fluidity */
-
-img,
-canvas,
-iframe,
-video,
-svg,
-select,
-textarea {
-  max-width: 100%;
-}
-
-@import url(http://fonts.googleapis.com/css?family=Merriweather:300italic,300);
-
-html {
-  font-size: 18px;
-  max-width: 100%;
-}
-
-body {
-  color: #444;
-  font-family: 'Merriweather', Georgia, serif;
-  margin: 0;
-  max-width: 100%;
-}
-
-/* === A bit of a gross hack so we can have bleeding divs/blockquotes. */
-
-div img {
-  width: 100%;
-}
-
-blockquote p {
-  font-size: 1.5rem;
-  font-style: italic;
-  margin: 1rem auto 1rem;
-  max-width: 48rem;
-}
-
-li {
-  margin-left: 2rem;
-}
-
-/* Counteract the specificity of the gross *:not() chain. */
-
-h1 {
-  padding: 0 0 !important;
-}
-
-/*  === End gross hack */
-
-p {
-  color: #555;
-  height: auto;
-  line-height: 1.45;
-}
-
-pre,
-code {
-  font-family: Menlo, Monaco, "Courier New", monospace;
-}
-
-pre {
-  background-color: #fafafa;
-  font-size: .8rem;
-  overflow-x: scroll;
-  padding: 1.125em;
-}
-
-a,
-a:visited {
-  color: #3498db;
-}
-
-a:hover,
-a:focus,
-a:active {
-  color: #2980b9;
-}
-
-    </style>
 
 
 <style type="text/css">
@@ -12216,9 +12004,60 @@ div.text.rendered_html table {
 <h4 id="Introduccion-a-la-teoria-de-la-computacion">Introduccion a la teoria de la computacion<a class="anchor-link" href="#Introduccion-a-la-teoria-de-la-computacion">&#182;</a></h4><h5 id="Taller-#1---Automatas-finitos">Taller #1 - Automatas finitos<a class="anchor-link" href="#Taller-#1---Automatas-finitos">&#182;</a></h5><p><strong>Me disculpo con el lector por el desorden en los diagramas</strong></p>
 <p>$1.$Considere el problema de determinar si un código corresponde a un ISBN de 13 dígitos. Construya un autómata finito determinístico para identificar si un código es válido o no. Especifique formalmente el autómata, dibuje el diagrama y la tabla de transiciones. Implemente el autómata correspondiente utilizado una clase autómata.</p>
 <p>Problema. Un codigo ISBN de 13 digitos se caracteriza por que el ultimo digito $r$ cumple que:</p>
-<p>$$r=(10-(x_1+x_2+x_3+x_4+x_5+x_6+x_7+x_8+x_9+x_{10}+x_{11}+x_{12}) \bmod 10)$$</p>
+<p>$$r=(10-(x_1+3x_2+x_3+3x_4+x_5+3x_6+x_7+3x_8+x_9+3x_{10}+x_{11}+3x_{12}) \bmod 10)$$</p><p>Resolucion del problema. lo primero que se piensa hacer es crear un automata con los estados $\{0,1,...,8,9\}$ y con el alfabato $\{0,1,...,8,9\}$ e ir cambiando de estados dada la entrada para el alfabeto para que el valor numerico del estado consida con r, al tratar de resolverlo de esta manera se presentan varios problemas, el primero es que no sabemos si el numero(simbolo) que se ingreso esta en una posicion par o impar para saber si se multiplica por 3 o no, el segundo es que no tenemos la certeza de saber cuando acaba la cadena, asi si $r$ coinside con el ultimo simbolo, lo unico que haria el automata es saltar a otro estado.</p>
+<p>Estos problemas se pueden resolver creando un automata finito no deterministico, asi por cada digiti posible a ingresar saldrian 2 estados, uno que lo tome como si se multiplicara por 3 y otro que no, y para el estado $i$ se tendria una transicion para el digito $i$ que lleve al estado final. En este automata se tendrian 10 estados, para cada uno de los 9 estados que no es el estado final se tendrian 21 posibles transiciones(2 por cada digito y el que va al estado final), en total serian unas 189 transiciones. Aunque esta solucion puede parecer sencilla, al final se tendria que pasar este AFN a un AFD, y esto en el peor de los casos serian $2^{10} = 1024$ estados con muchas mas transiciones que 189.</p>
+<p>En los 2 casos anteriores el problema radica en la falta de informacion y/o la poca capacidad de recordar del automata, para solventar este  problema se puede hacer 2 cosas, aumentar la cantidad de estados para de alguna forma aumentar la memoria del automata, o modificar el alfabeto para que el automata pueda resibir mas informacion.</p>
+<p>Obtando por modificar el alfabeto lo primero que se hace es ver que informacion de mas se quiere dar al automata, yo quiero que el automata sepa si es un numero par o impar, y tambien quiero saber si es el simbolo final, para esto se crea el conjunto $\{P,I,F\}$, donde P:Par, I:Impar y F:Fin</p>
+<p>Se define el automata AFD M como:
+$$M=(Q,\Sigma,\delta,0,Z)$$</p>
+<p>Como ya se habia definido anteriormente, los estados de M representan los posibles resultados de $r$ y un estado final $Z$, se tiene que $Q = \{1,2,3,4,5,6,7,8,9,0,Z\}$</p>
+<p>Para el alfabeto \Sigma la opcion mas natural seria $\sigma = \{0,1,2,3,4,5,6,7,8,9\}$, pero como se quiere pasar mas informacion al automata, se opta por $\Sigma = \sigma \times \{P,I,F\}$, asi \Sigma seria un conjunto de parejas ordenadas tipo $(n,i)$ donde $n$ es el digito a ingresar e $i$ es la informacion adicional que recibe el automata. En este caso los simbolos de nuestro alfabeto serian tuplas, y una palabra seria una secuencia de tuplas.</p>
+<p>Para la funcion $\delta$ en vez de hacer la tabla de transiciones o hacer el diagrama, usare la aritmetica modular para definirla:</p>
+<blockquote><p>a. si $i \in Q\ y\ (\ j,I) \in \Sigma$, para todo $i$, se tiene que $\delta(i, (j, I)) = (i - j)\bmod10$</p>
+<p>b. si $i \in Q\ y\ (\ j,P) \in \Sigma$, para todo $i$, se tiene que $\delta(i, (j, P)) = (i - 3j)\bmod10$</p>
+<p>c. si $i \in Q\ y\ (\ i,F) \in \Sigma$, para todo $i$, se tiene que $\delta(i, (i, F)) = Z$</p>
+</blockquote>
+<p>Se tiene que tener cuidado ya que algunas operaciones se hicieron con simbolos y no con numeros como tal, en el caso anterior se tuvo en cuenta el valor numerico de los simbolos para poder hacer operaciones con estos</p>
+<p>PD: Este automata acepta muchas cadenas que no son codigos ISBN, empezando por que la cadena no necesariamente es de tamaño 13, tambien si se le da informacion incorrecta como la secuencia de tuplas $(1,I)(1,I)(8,F)$ el automata la aceptara, pero la segunda tupla no representaria a un $1$ en una posicion par.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Automata</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Q</span> <span class="o">=</span> <span class="n">Q</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">=</span> <span class="n">S</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">q</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="n">F</span>
+
+    <span class="k">def</span> <span class="nf">funcionExtendida</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcionExtendida</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)]),</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">q</span>
+<span class="c1">#Funcion de transicion de A        </span>
+<span class="k">def</span> <span class="nf">ISBNchecker</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Z&#39;</span>
+    
+<span class="n">A</span> <span class="o">=</span> <span class="n">Automata</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;F&#39;</span> <span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span><span class="n">ISBNchecker</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> 
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -12279,7 +12118,7 @@ $$ A = (\{1,2,3,4,5,6\},\{a,b\},\delta,1,\{1,2,3,4,5\})$$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
@@ -12293,7 +12132,7 @@ $$ A = (\{1,2,3,4,5,6\},\{a,b\},\delta,1,\{1,2,3,4,5\})$$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -12321,7 +12160,7 @@ $$ A = (\{1,2,3,4,5,6\},\{a,b\},\delta,1,\{1,2,3,4,5\})$$</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
 
 
 <div class="output_png output_subarea output_execute_result">
@@ -14423,7 +14262,7 @@ $$M = (\{a, b, c, d, e\}, \{1,2,3\}, \delta, a,{e})$$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -14452,7 +14291,7 @@ $$M = (\{a, b, c, d, e\}, \{1,2,3\}, \delta, a,{e})$$</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_png output_subarea output_execute_result">
@@ -16806,10 +16645,31 @@ aceptados por un DFA.</p>
 </tbody>
 </table>
 <p>Por definición se tiene que $L = \{w\ \mid\ \delta^*(1, w)\cap \{3\} \not= \emptyset\}$</p>
-<p>Se considera a $w = "ac"$ y se evalua $\delta^*(1, w)$:</p>
+<p>Se considera a $w = ac$ y se evalua $\delta^*(1, w)$:</p>
 <blockquote><p>$1. \delta^*(1, \varepsilon) = \{1\}\\2. \delta^*(1, a) = \delta(1, a) = \{2,6\}\\3. \delta^*(1, ac) = \delta(2, c) \cup \delta(6, c) = \{4,5\}$</p>
 </blockquote>
-<p>Como $\delta^*(1, ac) = \{4,5\}\ y\ \{4,5\} \cap \{3\} = \emptyset$ se dice que la palabra "ac" no es aceptada por $A$, por lo tanto  $A$ no acepta el lenguaje $L = \{ w \mid w = a^ib^j o w = a^ic^j, i \geq 1, j\geq1\}$.</p>
+<p>Como $\delta^*(1, ac) = \{4,5\}\ y\ \{4,5\} \cap \{3\} = \emptyset$ se dice que la palabra "ac" no es aceptada por $A$, por lo tanto  $A$ no acepta el lenguaje $L = \{ w \mid w = a^ib^j\ o\ w = a^ic^j, i \geq 1, j\geq1\}$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$9.$Respecto al uso de autómatas (máquinas de estado finito) para el diseño de personajes de video juegos (4 Puntos):</p>
+
+<pre><code>a. ¿Cúales con las ventajas del uso de la abstracción de maquinas de estado frente a una implementación utlizando condicionales?
+
+b. ¿Cómo se utilizan los autómatas en el diseño de personajes para videojuegos?
+
+c. Seleccione su personaje de video juegos parecido, especifique formalmente su autómata, encuentre el lenguaje aceptado por el automata, pruebe que el lenguaje propuesto efectivamente es aceptado por el autómata. Seleccione un personaje   con al menos 4 estados y 4 acciones.
+
+
+</code></pre>
+<p>La ventaja principal es que se tiene claro que pasa despues de si se oprime determinada tecla, esto nos permite reutilizar partes del propio automata, crear combos o patrones de teclas para determinada accion y todo esto se ve de forma mas clara, tambien por que este con una matriz que represente la matriz de transicion y con algoritmos para grafos ya se tendria toda la informacion que se necesita para hacer funcionar al programa, si se quiere agregar un boton o una accion tambien seria facil, todo esto con condicionales se volveria mas complicado.</p>
+<p>Para el diseño de personajes se crea un analogo de lo que hara el personaje y el alcanze de un automata puede tener en esto, se piensa primero que todo en que las teclas del control es el alfabeto con el que trabaja el automata y los comandos que el personaje acepta, los estados del automata son las acciones que el personaje puede hacer, despues de esto se agregan patrones de teclas que el automata puede identificar para que el personaje tenga acciones mas complejas.</p>
 
 </div>
 </div>
