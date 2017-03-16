@@ -12038,23 +12038,60 @@ $$M=(Q,\Sigma,\delta,0,Z)$$</p>
 
     <span class="k">def</span> <span class="nf">funcionExtendida</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcionExtendida</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)]),</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+          <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcionExtendida</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">q</span>
-<span class="c1">#Funcion de transicion de A        </span>
+<span class="c1">#Funcion de transicion de A    </span>
+
+<span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+  <span class="n">isbn</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="p">(</span><span class="s1">&#39;P&#39;</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">2</span> ==0 else &#39;I&#39;)] for i in range(len(l))]
+  <span class="n">isbn</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">isbn</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">isbn</span>
+  
 <span class="k">def</span> <span class="nf">ISBNchecker</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="mi">10</span>
     <span class="k">elif</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="mi">10</span>
     <span class="k">elif</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;Z&#39;</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">q</span><span class="p">:</span>
+          <span class="k">return</span> <span class="s1">&#39;Z&#39;</span>
+    <span class="k">return</span> <span class="n">q</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Imprime Z si es un codigo valido y cualquiero otra cosa en otro caso.&quot;</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">Automata</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;F&#39;</span> <span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span><span class="n">ISBNchecker</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+<span class="n">valido</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="s2">&quot;9780306406157&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">funcionExtendida</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">valido</span><span class="p">))</span>
+
+<span class="n">noValido</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="s2">&quot;9780306406151&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">funcionExtendida</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">noValido</span><span class="p">))</span>
     
-<span class="n">A</span> <span class="o">=</span> <span class="n">Automata</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;F&#39;</span> <span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span><span class="n">ISBNchecker</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> 
-    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pruebalo!!&quot;</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">funcionExtendida</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">transform</span><span class="p">(</span><span class="n">w</span><span class="p">)))</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Imprime Z si es un codigo valido y cualquiero otra cosa en otro caso.
+Z
+7
+Pruebalo!!
+1234567890123
+8
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
